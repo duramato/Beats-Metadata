@@ -60,13 +60,12 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             s.wfile.write(f.read())
             f.close()
         else:
-            s.send_response(404)
-            s.send_header("Content-type", "text/html")
+            f=open("page.jpg", 'rb')
+            s.send_response(200)
+            s.send_header('Content-type',        'image/jpg')
             s.end_headers()
-            s.wfile.write("<html><head><title>Title goes here.</title></head>")
-            s.wfile.write("<body><p>This is a test.</p>")
-            s.wfile.write("<p>You accessed path: %s</p>" % s.path)
-            s.wfile.write("</body>" + str(server) + "</html>")
+            s.wfile.write(f.read())
+            f.close()
 
 if __name__ == '__main__':
     server_class = BaseHTTPServer.HTTPServer
