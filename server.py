@@ -10,11 +10,6 @@ PORT_NUMBER = 80
 
 class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def do_img(url):
-        from selenium import webdriver
-        driver = webdriver.PhantomJS()
-        driver.set_window_size(1920, 1080)
-        driver.get(url)
-        driver.save_screenshot('page.jpg')
         from PIL import Image
         img = Image.open("page.jpg")
         left = 350
@@ -32,13 +27,8 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         """Respond to a GET request."""
         # If someone went to "http://something.somewhere.net/foo/bar/",
         # then s.path equals "/foo/bar/".
-        server = parse_qs(urlparse(s.path).query)
-        url = 'http://applemusic.tumblr.com/beats1'
-        driver = webdriver.PhantomJS()
-        driver.set_window_size(1920, 1080)
         if s.path.startswith('/audio/wat/nowz.jpg'):
-            driver.get(url)
-            driver.save_screenshot('page.jpg')
+            server = parse_qs(urlparse(s.path).query)
             img = Image.open("page.jpg")
             left = 360
             top = 810
@@ -47,15 +37,14 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             box = (left, top, left+width, top+height)
             img4 = img.crop(box)
             img4.save("img5.jpg")
-            f=open("C:\Users\Guilherme\Desktop\img5.jpg", 'rb')
+            f=open("img5.jpg", 'rb')
             s.send_response(200)
             s.send_header('Content-type',        'image/jpg')
             s.end_headers()
             s.wfile.write(f.read())
             f.close()
         elif s.path.startswith('/audio/wat/show.jpg'):
-            driver.get(url)
-            driver.save_screenshot('page.jpg')
+            server = parse_qs(urlparse(s.path).query)
             img = Image.open("page.jpg")
             left = 460
             top = 830
@@ -64,7 +53,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             box = (left, top, left+width, top+height)
             img4 = img.crop(box)
             img4.save("img6.jpg")
-            f=open("C:\Users\Guilherme\Desktop\img6.jpg", 'rb')
+            f=open("img6.jpg", 'rb')
             s.send_response(200)
             s.send_header('Content-type',        'image/jpg')
             s.end_headers()
