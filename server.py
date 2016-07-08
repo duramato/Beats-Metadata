@@ -5,7 +5,7 @@ from selenium import webdriver
 from PIL import Image
 
 
-HOST_NAME = 'localhost'
+HOST_NAME = '0.0.0.0'
 PORT_NUMBER = 80
 
 class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
