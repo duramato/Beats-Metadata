@@ -75,9 +75,25 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             s.end_headers()
             s.wfile.write(f.read())
             f.close()
+        elif s.path.startswith('/audio/wat/nowz.jpg'):
+            server = parse_qs(urlparse(s.path).query)
+            img = Image.open("twitter.com-radio_scrobble.1080x1920.png")
+            left = 460
+            top = 470
+            width = 520
+            height = 100
+            box = (left, top, left+width, top+height)
+            img4 = img.crop(box)
+            img4.save("now.jpg")
+            f=open("now.jpg", 'rb')
+            s.send_response(200)
+            s.send_header('Content-type',        'image/jpg')
+            s.end_headers()
+            s.wfile.write(f.read())
+            f.close()
         else:
             f=open("page.jpg", 'rb')
-            s.send_response(200)
+            s.send_response(404)
             s.send_header('Content-type',        'image/jpg')
             s.end_headers()
             s.wfile.write(f.read())
