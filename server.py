@@ -27,7 +27,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         """Respond to a GET request."""
         # If someone went to "http://something.somewhere.net/foo/bar/",
         # then s.path equals "/foo/bar/".
-        if s.path.startswith('/audio/wat/nowz.jpg'):
+        if s.path.startswith('/audio/wat/showimg.jpg'):
             server = parse_qs(urlparse(s.path).query)
             img = Image.open("page.jpg")
             left = 360
