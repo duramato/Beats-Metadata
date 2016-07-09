@@ -1,2 +1,1 @@
-Beats metadata
-Gets radio show logo and title and servers them in a server. And possibly album and music names soon too
+Gets radio show's logo and title and serves them in a webserver. Now with album cover stupport too
