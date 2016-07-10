@@ -95,7 +95,7 @@ class SlowHandler(BaseHTTPRequestHandler):
                 #img4.save("now1.jpg")
                 
             
-                im = Image.open('test.png')
+                im = img4
                 im = im.convert('RGBA')
 
                 data = np.array(im)   # "data" is a height x width x 4 numpy array
