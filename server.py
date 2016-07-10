@@ -1,4 +1,6 @@
 import time
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
+from SocketServer import ThreadingMixIn
 import BaseHTTPServer
 from urlparse import urlparse, parse_qs
 from selenium import webdriver
@@ -10,10 +12,6 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 HOST_NAME = '0.0.0.0'
 PORT_NUMBER = 80
-
-import time
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
-from SocketServer import ThreadingMixIn
 
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
@@ -99,8 +97,8 @@ class SlowHandler(BaseHTTPRequestHandler):
             s.wfile.write(f.read())
             f.close()
         else:
-            f=open("cookie.png", 'rb')
-            s.send_response(200)
+            f=open("page.jpg", 'rb')
+            s.send_response(404)
             s.send_header('Content-type',        'image/jpg')
             s.end_headers()
             s.wfile.write(f.read())
