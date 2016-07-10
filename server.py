@@ -11,25 +11,21 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 HOST_NAME = '0.0.0.0'
 PORT_NUMBER = 80
 
-class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
-    def do_img(url):
-        from PIL import Image
-        img = Image.open("page.jpg")
-        left = 350
-        top = 810
-        width = 500
-        height = 95
-        box = (left, top, left+width, top+height)
-        img4 = img.crop(box)
-        img4.save("img5.jpg")
+import time
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
+from SocketServer import ThreadingMixIn
+
+
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+    pass
+
+class SlowHandler(BaseHTTPRequestHandler):
     def do_HEAD(s):
         s.send_response(200)
         s.send_header("Content-type", "text/html")
         s.end_headers()
     def do_GET(s):
         """Respond to a GET request."""
-        # If someone went to "http://something.somewhere.net/foo/bar/",
-        # then s.path equals "/foo/bar/".
         if s.path.startswith('/audio/wat/showimg.jpg'):
             server = parse_qs(urlparse(s.path).query)
             img = Image.open("page.jpg")
@@ -103,16 +99,22 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             s.wfile.write(f.read())
             f.close()
         else:
-            f=open("page.jpg", 'rb')
-            s.send_response(404)
+            f=open("cookie.png", 'rb')
+            s.send_response(200)
             s.send_header('Content-type',        'image/jpg')
             s.end_headers()
             s.wfile.write(f.read())
             f.close()
 
+
+def test(HandlerClass = SlowHandler,
+         ServerClass = ThreadedHTTPServer):
+    _test(HandlerClass, ServerClass)
+     
+    
 if __name__ == '__main__':
     server_class = BaseHTTPServer.HTTPServer
-    httpd = server_class((HOST_NAME, PORT_NUMBER), MyHandler)
+    httpd = server_class((HOST_NAME, PORT_NUMBER), SlowHandler)
     print time.asctime(), "Server Starts - %s:%s" % (HOST_NAME, PORT_NUMBER)
     try:
         httpd.serve_forever()
