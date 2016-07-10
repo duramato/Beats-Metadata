@@ -4,6 +4,7 @@ from urlparse import urlparse, parse_qs
 from selenium import webdriver
 import PIL
 from PIL import Image
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 HOST_NAME = '0.0.0.0'
