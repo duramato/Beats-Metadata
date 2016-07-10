@@ -94,22 +94,20 @@ class SlowHandler(BaseHTTPRequestHandler):
                 img4 = img.crop(box)
                 #img4.save("now1.jpg")
                 
-                
-                R_OLD, G_OLD, B_OLD = (255, 255, 255)
-                R_NEW, G_NEW, B_NEW = (0, 0, 0)
-
-                #import Image
-                im = img4  #Image.open(OLD_PATH)
-                pixels = im.load()
-
-                width, height = im.size
-                for x in range(width):
-                   for y in range(height):
-                        r, g, b, a = pixels[x, y]
-                        if (r, g, b) == (R_OLD, G_OLD, B_OLD):
-                            pixels[x, y] = (R_NEW, G_NEW, B_NEW, a)
             
-                img4 = im
+                im = Image.open('test.png')
+                im = im.convert('RGBA')
+
+                data = np.array(im)   # "data" is a height x width x 4 numpy array
+                red, green, blue, alpha = data.T # Temporarily unpack the bands for readability
+
+                # Replace white with red... (leaves alpha values alone...)
+                white_areas = (red == 255) & (blue == 255) & (green == 255)
+                data[..., :-1][white_areas.T] = (255, 0, 0) # Transpose back needed
+
+                im2 = Image.fromarray(data)
+            
+                img4 = im2
             
             
                 basewidth = 375
