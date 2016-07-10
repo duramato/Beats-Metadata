@@ -4,6 +4,7 @@ from urlparse import urlparse, parse_qs
 from selenium import webdriver
 import PIL
 from PIL import Image
+from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
