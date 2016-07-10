@@ -109,7 +109,7 @@ class SlowHandler(BaseHTTPRequestHandler):
                 #img4 = img
             
             
-                orig_color = (255,255,255)
+                orig_color = (255,255,255, 0)
                 replacement_color = (255,255,255, 1)
                 img = img4.convert('RGB')#Image.open(filename).convert('RGB')
                 data = np.array(img)
