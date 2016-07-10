@@ -4,7 +4,6 @@ from SocketServer import ThreadingMixIn
 import BaseHTTPServer
 from urlparse import urlparse, parse_qs
 from selenium import webdriver
-import Image
 import numpy as np
 import PIL
 from PIL import Image
