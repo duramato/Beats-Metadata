@@ -95,28 +95,21 @@ class SlowHandler(BaseHTTPRequestHandler):
                 #img4.save("now1.jpg")
                 
                 
-                #img = img4
-                #img = img.convert("RGBA")
+                R_OLD, G_OLD, B_OLD = (255, 255, 255)
+                R_NEW, G_NEW, B_NEW = (0, 0, 0)
 
-                #pixdata = img.load()
+                #import Image
+                im = img4  #Image.open(OLD_PATH)
+                pixels = im.load()
 
-                #for y in xrange(img.size[1]):
-                #    for x in xrange(img.size[0]):
-                #        if pixdata[x, y] == (255, 255, 255, 255):
-                #            pixdata[x, y] = (255, 255, 255, 0)
-                #            
-                #img.save("img2.png", "PNG")
-                #img4 = img
+                width, height = im.size
+                for x in range(width):
+                   for y in range(height):
+                        r, g, b, a = pixels[x, y]
+                        if (r, g, b) == (R_OLD, G_OLD, B_OLD):
+                            pixels[x, y] = (R_NEW, G_NEW, B_NEW, a)
             
-            
-                orig_color = (255,255,255, 0)
-                replacement_color = (255,255,255, 1)
-                img = img4.convert('RGB')#Image.open(filename).convert('RGB')
-                data = np.array(img)
-                data[(data == orig_color).all(axis = -1)] = replacement_color
-                img2 = Image.fromarray(data, mode='RGB')
-                
-                img4 = img2
+                img4 = im
             
             
                 basewidth = 375
