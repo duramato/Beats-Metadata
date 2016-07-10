@@ -2,6 +2,7 @@ import time
 import BaseHTTPServer
 from urlparse import urlparse, parse_qs
 from selenium import webdriver
+import PIL
 from PIL import Image
 
 
@@ -84,7 +85,15 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             height = 100
             box = (left, top, left+width, top+height)
             img4 = img.crop(box)
-            img4.save("now.jpg")
+            img4.save("now1.jpg")
+            
+            basewidth = 375
+            img = Image.open('now1.jpg')
+            wpercent = (basewidth/float(img.size[0]))
+            hsize = int((float(img.size[1])*float(wpercent)))
+            img = img.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
+            img.save('now.jpg')
+            
             f=open("now.jpg", 'rb')
             s.send_response(200)
             s.send_header('Content-type',        'image/jpg')
