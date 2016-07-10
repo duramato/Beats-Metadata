@@ -98,7 +98,7 @@ class SlowHandler(BaseHTTPRequestHandler):
                 #img = Image.open(sys.argv[1])
                 img = img4.convert("RGBA")
 
-                pixdata = img#.load()
+                pixdata = img.load()
 
                 # Clean the background noise, if color != white, then set to black.
 
