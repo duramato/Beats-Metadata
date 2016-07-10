@@ -95,22 +95,19 @@ class SlowHandler(BaseHTTPRequestHandler):
                 #img4.save("now1.jpg")
                 
             
-                im = img4
-                im = im.convert('RGBA')
+                #img = Image.open(sys.argv[1])
+                img = img4.convert("RGBA")
 
-                data = np.array(im)   # "data" is a height x width x 4 numpy array
-                red, green, blue, alpha = data.T # Temporarily unpack the bands for readability
+                pixdata = img#.load()
 
-                
+                # Clean the background noise, if color != white, then set to black.
 
-                # Replace white with red... (leaves alpha values alone...)
-                white_areas = (red == 255) & (blue == 255) & (green == 255)
-                print(white_areas)
-                data[..., :-1][white_areas.T] = (255, 0, 0) # Transpose back needed
-
-                im2 = Image.fromarray(data)
+                for y in xrange(img.size[1]):
+                   for x in xrange(img.size[0]):
+                        if pixdata[x, y] == (255, 255, 255, 255):
+                            pixdata[x, y] = (0, 0, 0, 255)
             
-                img4 = im2
+                img4 = img
             
             
                 basewidth = 375
