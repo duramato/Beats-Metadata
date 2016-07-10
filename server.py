@@ -4,6 +4,8 @@ from SocketServer import ThreadingMixIn
 import BaseHTTPServer
 from urlparse import urlparse, parse_qs
 from selenium import webdriver
+import Image
+import numpy as np
 import PIL
 from PIL import Image
 from PIL import ImageFile
@@ -94,18 +96,29 @@ class SlowHandler(BaseHTTPRequestHandler):
                 #img4.save("now1.jpg")
                 
                 
-                img = img4
-                img = img.convert("RGBA")
+                #img = img4
+                #img = img.convert("RGBA")
 
-                pixdata = img.load()
+                #pixdata = img.load()
 
-                for y in xrange(img.size[1]):
-                    for x in xrange(img.size[0]):
-                        if pixdata[x, y] == (255, 255, 255, 255):
-                            pixdata[x, y] = (255, 255, 255, 0)
-                            
+                #for y in xrange(img.size[1]):
+                #    for x in xrange(img.size[0]):
+                #        if pixdata[x, y] == (255, 255, 255, 255):
+                #            pixdata[x, y] = (255, 255, 255, 0)
+                #            
                 #img.save("img2.png", "PNG")
-                img4 = img
+                #img4 = img
+            
+            
+                orig_color = (255,255,255)
+                replacement_color = (0,0,0)
+                img = img4.convert('RGB')#Image.open(filename).convert('RGB')
+                data = np.array(img)
+                data[(data == orig_color).all(axis = -1)] = replacement_color
+                img2 = Image.fromarray(data, mode='RGB')
+                
+                img4 = img2
+            
             
                 basewidth = 375
                 img = img4 #Image.open('now1.jpg')
