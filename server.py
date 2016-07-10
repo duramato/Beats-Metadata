@@ -92,6 +92,20 @@ class SlowHandler(BaseHTTPRequestHandler):
                 box = (left, top, left+width, top+height)
                 img4 = img.crop(box)
                 #img4.save("now1.jpg")
+                
+                
+                img = img4
+                img = img.convert("RGBA")
+
+                pixdata = img.load()
+
+                for y in xrange(img.size[1]):
+                    for x in xrange(img.size[0]):
+                        if pixdata[x, y] == (255, 255, 255, 255):
+                            pixdata[x, y] = (255, 255, 255, 0)
+                            
+                #img.save("img2.png", "PNG")
+                img4 = img
             
                 basewidth = 375
                 img = img4 #Image.open('now1.jpg')
