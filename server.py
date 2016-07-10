@@ -101,9 +101,6 @@ class SlowHandler(BaseHTTPRequestHandler):
                 data = np.array(im)   # "data" is a height x width x 4 numpy array
                 red, green, blue, alpha = data.T # Temporarily unpack the bands for readability
 
-                print(red)
-                print(green)
-                print(blue)
                 print(alpha)
 
                 # Replace white with red... (leaves alpha values alone...)
