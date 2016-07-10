@@ -74,6 +74,7 @@ class SlowHandler(BaseHTTPRequestHandler):
                 s.wfile.write(f.read())
                 f.close()
             except IOError:
+                print("Ups on cover.jpg")
                 f=open("cover.jpg", 'rb')
                 s.send_response(200)
                 s.send_header('Content-type',        'image/jpg')
@@ -106,6 +107,7 @@ class SlowHandler(BaseHTTPRequestHandler):
                 s.wfile.write(f.read())
                 f.close()
             except IOError:
+                print("Ups on now.jpg")
                 f=open("now.jpg", 'rb')
                 s.send_response(200)
                 s.send_header('Content-type',        'image/jpg')
