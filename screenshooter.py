@@ -16,6 +16,7 @@ while True:
         logger.info('No File exsits')
     logger.info('screenie init')
     os.system("./webshots --width 1080 --height 1920 https://twitter.com/radio_scrobble")
+    os.system("mv twitter.com-radio_scrobble.1080x1920.png music_page.png")
     #print('Screenie taken @ ' + str(time.time()) )
     logger.info('Screenie taken')
     time.sleep(10.0 - ((time.time() - starttime) % 10.0))
