@@ -60,7 +60,7 @@ class SlowHandler(BaseHTTPRequestHandler):
         elif s.path.startswith('/audio/wat/art.jpg'):
             #server = parse_qs(urlparse(s.path).query)
             try:
-                img = Image.open("twitter.com-radio_scrobble.1080x1920.png")
+                img = Image.open("music_page.png")
                 left = 470
                 top = 580
                 width = 500
@@ -85,7 +85,7 @@ class SlowHandler(BaseHTTPRequestHandler):
         elif s.path.startswith('/audio/wat/nowz.jpg'):
             #server = parse_qs(urlparse(s.path).query)
             try:
-                img = Image.open("twitter.com-radio_scrobble.1080x1920.png")
+                img = Image.open("music_page.png")
                 left = 460
                 top = 470
                 width = 520
