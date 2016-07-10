@@ -112,7 +112,7 @@ class SlowHandler(BaseHTTPRequestHandler):
                 for y in xrange(img.size[1]):
                    for x in xrange(img.size[0]):
                         if pixdata[x, y] == (255, 255, 255, 255):
-                            pixdata[x, y] = (255, 255, 255, 0)
+                            pixdata[x, y] = (255, 255, 255, 100)
             
                 img4 = img
             
