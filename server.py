@@ -100,17 +100,19 @@ class SlowHandler(BaseHTTPRequestHandler):
 
                 pixdata = img.load()
 
-                # Clean the background noise, if color != white, then set to black.
+                # Remove the blue color
+
+                for y in xrange(img.size[1]):
+                   for x in xrange(img.size[0]):
+                        if pixdata[x, y] == (0, 132, 180, 255):
+                            pixdata[x, y] = (255, 255, 255, 0)
+                            
+                # Remove the white background
 
                 for y in xrange(img.size[1]):
                    for x in xrange(img.size[0]):
                         if pixdata[x, y] == (255, 255, 255, 255):
                             pixdata[x, y] = (255, 255, 255, 0)
-
-                for y in xrange(img.size[1]):
-                   for x in xrange(img.size[0]):
-                        if pixdata[x, y] == (56, 95, 124, 255):
-                            pixdata[x, y] = (56, 95, 124, 0)
             
                 img4 = img
             
