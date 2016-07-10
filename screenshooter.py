@@ -18,4 +18,4 @@ while True:
     os.system("./webshots --width 1080 --height 1920 https://twitter.com/radio_scrobble")
     #print('Screenie taken @ ' + str(time.time()) )
     logger.info('Screenie taken')
-    time.sleep(5.0 - ((time.time() - starttime) % 5.0))
+    time.sleep(10.0 - ((time.time() - starttime) % 10.0))
