@@ -26,6 +26,7 @@ class SlowHandler(BaseHTTPRequestHandler):
     def do_GET(s):
         """Respond to a GET request."""
         if s.path.startswith('/audio/wat/showimg.jpg'):
+            import urllib
             from urllib import urlopen
             import json
             import time
