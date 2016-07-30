@@ -62,7 +62,7 @@ class SlowHandler(BaseHTTPRequestHandler):
             s.send_response(200)
             s.send_header('Content-type',        'image/jpg')
             s.end_headers()
-            s.wfile.write("<img src="%s">" % image)
+            s.wfile.write('<img src="%s">' % image)
             #sourceimg = '<img src="{0}">'.format(image)
             #print(sourceimg)
             #s.wfile.write(sourceimg)
