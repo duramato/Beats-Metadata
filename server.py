@@ -68,7 +68,7 @@ class SlowHandler(BaseHTTPRequestHandler):
             #print(sourceimg)
             #s.wfile.write(sourceimg)
             image = urllib.urlopen(image).read()
-            s.wfile.write(image.read())
+            s.wfile.write(image)
             image.close()
         elif s.path.startswith('/audio/wat/show.jpg'):
             #server = parse_qs(urlparse(s.path).query)
