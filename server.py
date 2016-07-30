@@ -47,7 +47,7 @@ class SlowHandler(BaseHTTPRequestHandler):
                 end = int(artist.get("end"))
                 end = str(end)[:-3]
                 if int(end) < int(time_now):
-                    print('Skipping already aired: ' + title)
+                    #print('Skipping already aired: ' + title)
                     continue
                 item = {
                         'title': title,
@@ -61,7 +61,7 @@ class SlowHandler(BaseHTTPRequestHandler):
             image = result[0]['image']
             s.send_response(200)
             s.send_header('Content-type',        'image/jpg')
-            s.end_headers()
+            s.end_headers(image.read())
             s.wfile.write(image)
         elif s.path.startswith('/audio/wat/show.jpg'):
             #server = parse_qs(urlparse(s.path).query)
