@@ -26,21 +26,38 @@ class SlowHandler(BaseHTTPRequestHandler):
     def do_GET(s):
         """Respond to a GET request."""
         if s.path.startswith('/audio/wat/showimg.jpg'):
-            #server = parse_qs(urlparse(s.path).query)
-            img = Image.open("page.jpg")
-            left = 360
-            top = 810
-            width = 100
-            height = 95
-            box = (left, top, left+width, top+height)
-            img4 = img.crop(box)
-            img4.save("img5.jpg")
-            f=open("img5.jpg", 'rb')
-            s.send_response(200)
-            s.send_header('Content-type',        'image/jpg')
-            s.end_headers()
-            s.wfile.write(f.read())
-            f.close()
+            from urllib import urlopen
+            import json
+            import time
+            sock = urlopen("http://fuse-music.herokuapp.com/api/programs")
+            htmlSource = sock.read()
+            sock.close() 
+            url = htmlSource
+            artists = json.loads(url)
+            items = artists.get('programs')
+            result = []
+            for artist in items:
+                title = artist.get("title")
+                image = artist.get("image")
+                if not image:
+                    image = "http://applesocial.s3.amazonaws.com/assets/images/branding/on-air-default.jpg"
+                start = int(artist.get("start"))
+                time_now = int(time.time())
+                start = str(start)[:-3]
+                end = int(artist.get("end"))
+                end = str(end)[:-3]
+                if int(end) < int(time_now):
+                    print('Skipping already aired: ' + title)
+                    continue
+                item = {
+                        'title': title,
+                        'start': start,
+                        'end': end,
+                        'now': time_now,
+                        'image': image}
+                result.append(item)
+                #print(item)
+                result.sort(key=lambda k: k['start'])
         elif s.path.startswith('/audio/wat/show.jpg'):
             #server = parse_qs(urlparse(s.path).query)
             img = Image.open("page.jpg")
