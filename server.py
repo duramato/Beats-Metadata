@@ -63,13 +63,8 @@ class SlowHandler(BaseHTTPRequestHandler):
             s.send_response(200)
             s.send_header('Content-type',        'image/jpg')
             s.end_headers()
-            #s.wfile.write('<img src="%s">' % image)
-            #sourceimg = '<img src="{0}">'.format(image)
-            #print(sourceimg)
-            #s.wfile.write(sourceimg)
             image = urllib.urlopen(image).read()
             s.wfile.write(image)
-            image.close()
         elif s.path.startswith('/audio/wat/show.jpg'):
             #server = parse_qs(urlparse(s.path).query)
             img = Image.open("page.jpg")
