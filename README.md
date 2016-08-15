@@ -4,7 +4,7 @@ Gets radio show's logo and title and serves them in a webserver. Also album cove
 selenium
 pillow
 numpy
-
+https://github.com/yaph/webshots
 **How to run?**
 Just set up 2 upstart scripts, one for each process
 
