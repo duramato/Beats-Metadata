@@ -16,6 +16,7 @@ import json
 import time
 import os
 import csv
+import image2text
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 title_regex = re.compile(r'(?:https?:\/\/.*\/images?\/.*\/)(.*)', re.I)
@@ -113,9 +114,13 @@ class SlowHandler(BaseHTTPRequestHandler):
     def do_GET(s):
         """Respond to a GET request."""
         if s.path.startswith('/audio/wat/showimg.jpg'):
+        
             csv_file = "db.csv"
             string = TumblerGetter.ReadCSVasDict(csv_file)
-            #print(string[0])
+            
+            # Create show name image
+            image2text.main(string[0]["file_name"])
+            
             f=open(string[0]["file_name"], 'rb')
             s.send_response(200)
             s.send_header('Content-type',        'image/png')
@@ -123,22 +128,15 @@ class SlowHandler(BaseHTTPRequestHandler):
             s.wfile.write(f.read())
             f.close()
             
-        elif s.path.startswith('/audio/wat/show1.jpg'):
-            #server = parse_qs(urlparse(s.path).query)
-            img = Image.open("page.jpg")
-            left = 460
-            top = 830
-            width = 150
-            height = 30
-            box = (left, top, left+width, top+height)
-            img4 = img.crop(box)
-            img4.save("img6.jpg")
-            f=open("img6.jpg", 'rb')
+        elif s.path.startswith('/audio/wat/show.jpg'):
+        
+            f=open("show.png", 'rb')
             s.send_response(200)
-            s.send_header('Content-type',        'image/jpg')
+            s.send_header('Content-type',        'image/png')
             s.end_headers()
             s.wfile.write(f.read())
             f.close()
+            
         elif s.path.startswith('/audio/wat/art.jpg'):
             #server = parse_qs(urlparse(s.path).query)
             try:
