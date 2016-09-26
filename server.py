@@ -21,7 +21,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 title_regex = re.compile(r'(?:https?:\/\/.*\/images?\/.*\/)(.*)', re.I)
 HOST_NAME = '0.0.0.0'
-PORT_NUMBER = 80
+PORT_NUMBER = 82
 
 class TumblerGetter():
     @staticmethod
