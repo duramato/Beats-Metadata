@@ -15,12 +15,14 @@ from urllib import urlopen
 import json
 import time
 import os
+import csv
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 title_regex = re.compile(r'(?:https?:\/\/.*\/images?\/.*\/)(.*)', re.I)
+HOST_NAME = '0.0.0.0'
+PORT_NUMBER = 80
 
 class TumblerGetter():
-
     @staticmethod
     def ReadCSVasDict(csv_file):
         try:
@@ -54,7 +56,6 @@ class TumblerGetter():
         except IOError as (errno, strerror):
             print("I/O error({0}): {1}".format(errno, strerror))    
         return   
-
     @staticmethod
     def BootStrap():
             sock = urlopen("http://fuse-music.herokuapp.com/api/programs")
@@ -100,10 +101,6 @@ class TumblerGetter():
             csv_file = "db.csv"
 
             TumblerGetter.WriteDictToCSV(csv_file,csv_columns,my_dict)
-
-HOST_NAME = '0.0.0.0'
-PORT_NUMBER = 80
-
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
     pass
@@ -223,6 +220,13 @@ class SlowHandler(BaseHTTPRequestHandler):
                 s.end_headers()
                 s.wfile.write(f.read())
                 f.close()
+        else:
+            f=open("page.jpg", 'rb')
+            s.send_response(404)
+            s.send_header('Content-type',        'image/jpg')
+            s.end_headers()
+            s.wfile.write(f.read())
+            f.close()
 
 
 def test(HandlerClass = SlowHandler,
