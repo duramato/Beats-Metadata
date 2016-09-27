@@ -119,7 +119,7 @@ class SlowHandler(BaseHTTPRequestHandler):
             string = TumblerGetter.ReadCSVasDict(csv_file)
             
             # Create show name image
-            image2text.main(string[0]["file_name"])
+            image2text.main(string[0]["title"])
             
             f=open(string[0]["file_name"], 'rb')
             s.send_response(200)
