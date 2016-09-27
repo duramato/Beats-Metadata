@@ -11,7 +11,7 @@ PIXEL_OFF = 255  # PIL color to use for "off"
 def main(string):
     image = text_image(string)
     image.show()
-    image.save('content.png')
+    image.save('show.png')
 
 
 def text_image(text_path, font_path=None):
