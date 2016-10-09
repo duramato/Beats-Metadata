@@ -89,7 +89,8 @@ class TumblerGetter():
                     print("Writting {0} to disk".format(file_name))
                     f = open(file_name,'wb')
                     #try:
-                    image = urljoin(image, "http://")
+                    image = urljoin(image, "http")
+                    print('Found "image": {0}'.format(image))
                     request = urllib2.Request(image)
                     request.add_header('User-agent', 'Mozilla/5.0 (Linux i686)')
                     f.write(urllib2.urlopen(request).read())
