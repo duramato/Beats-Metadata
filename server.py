@@ -19,7 +19,7 @@ import csv
 import image2text
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-title_regex = re.compile(r'(?:https?:\/\/.*\/images?\/.*\/)(.*)', re.I)
+title_regex = re.compile(r'(?:(?:https?:)?\/\/.*\/(?:images|uploads)?\/(.*\/)?)(.*)', re.I)
 HOST_NAME = '0.0.0.0'
 PORT_NUMBER = 82
 
