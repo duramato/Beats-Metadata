@@ -13,7 +13,7 @@ import threading
 import urllib
 import urllib2
 from urllib import urlopen
-from urlparse import urlparse
+from urlparse import urlparse, urljoin
 import json
 import time
 import os
