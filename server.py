@@ -13,6 +13,7 @@ import threading
 import urllib
 import urllib2
 from urllib import urlopen
+from urllib.parse import urljoin
 import json
 import time
 import os
@@ -88,6 +89,7 @@ class TumblerGetter():
                     print("Writting {0} to disk".format(file_name))
                     f = open(file_name,'wb')
                     #try:
+                    urljoin(image, "http")
                     request = urllib2.Request(image)
                     request.add_header('User-agent', 'Mozilla/5.0 (Linux i686)')
                     f.write(urllib2.urlopen(request).read())
