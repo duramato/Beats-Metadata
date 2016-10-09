@@ -81,7 +81,8 @@ class TumblerGetter():
                     #print('Skipping already aired: ' + title)
                     continue
                 file_name = title_regex.search(image).group(1)
-                print("Found: {0}".format(file_name))
+                print('Found "image": {0}'.format(image))
+                print('Found "file_name": {0}'.format(file_name))
                 if not os.path.isfile(file_name):
                     print("Writting {0} to disk".format(file_name))
                     f = open(file_name,'wb')
