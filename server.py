@@ -91,9 +91,9 @@ class TumblerGetter():
                         request = urllib2.Request(image)
                         request.add_header('User-agent', 'Mozilla/5.0 (Linux i686)')
                         f.write(urllib.urlopen(request).read())
-                    except Exception as ex:
-                        print("Ups failed retriving image with {0}, retrying...".format(ex))
-                        f.write(urllib.urlopen(image).read())
+                    #except Exception as ex:
+                        #print("Ups failed retriving image with {0}, retrying...".format(ex))
+                        #f.write(urllib.urlopen(image).read())
                     f.close()
                 item = {}
                 item = {
