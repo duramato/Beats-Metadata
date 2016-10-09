@@ -55,7 +55,7 @@ class TumblerGetter():
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
                 writer.writeheader()
                 for data in dict_data:
-                    writer.writerow(data)
+                    writer.writerow(data.encode("utf8"))
         except IOError as (errno, strerror):
             print("I/O error({0}): {1}".format(errno, strerror))    
         return   
