@@ -88,7 +88,7 @@ class TumblerGetter():
                 if not os.path.isfile(file_name):
                     print("Writting {0} to disk".format(file_name))
                     f = open(file_name,'wb')
-                    image_path = urlparse("image")
+                    image_path = urlparse(image)
                     image = "http://" + image_path.netloc + image_path.path
                     print('Found "image": {0}'.format(image))
                     request = urllib2.Request(image)
