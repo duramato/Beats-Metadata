@@ -55,7 +55,7 @@ class TumblerGetter():
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
                 writer.writeheader()
                 for data in dict_data:
-                    writer.writerow(data.encode("utf8"))
+                    writer.writerow(data)
         except IOError as (errno, strerror):
             print("I/O error({0}): {1}".format(errno, strerror))    
         return   
@@ -100,12 +100,12 @@ class TumblerGetter():
                     f.close()
                 item = {}
                 item = {
-                        'title': title,
+                        'title': title.encode("utf8"),
                         'start': start,
                         'end': end,
                         'now': time_now,
-                        'image': image,
-                        'file_name': file_name
+                        'image': image.encode("utf8"),
+                        'file_name': file_name.encode("utf8")
                         }
                 items.append(item)
             final_result += items
