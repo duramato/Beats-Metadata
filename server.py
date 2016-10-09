@@ -11,6 +11,7 @@ from PIL import Image
 from PIL import ImageFile
 import threading
 import urllib
+import urllib2
 from urllib import urlopen
 import json
 import time
